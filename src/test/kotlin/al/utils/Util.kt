@@ -15,8 +15,48 @@ fun isArrayEquals(arr1: IntArray, arr2: IntArray): Boolean {
     return true
 }
 
-fun generateRandomArray(size: Int, maxValue: Int = size): IntArray {
+fun generateRandomArray(size: Int, maxValue: Int = size, isPositive: Boolean = false): IntArray {
     return IntArray(size) {
-        Random.nextInt(0, maxValue)
+        Random.nextInt(if (isPositive) 0 else -maxValue, maxValue)
     }
+}
+
+/**
+ * 产生一个随机数组，其中有一个数出现 k 次，其他数都出现 m 次
+ * m > 1, k < m
+ * [valueCount] 指其他数的值的数目
+ * return Pair(数组, target)
+ */
+fun generateKMArray(k: Int, m: Int, valueCount: Int): Pair<IntArray, Int> {
+    val otherValues = mutableSetOf<Int>()
+    var generatedValueCount = 0
+    while (generatedValueCount < valueCount) {
+        val value = Random.nextInt(0, valueCount * 2)
+        if (value !in otherValues) {
+            otherValues.add(value)
+            generatedValueCount++
+        }
+    }
+
+    var targetValue: Int
+
+    while (true) {
+        targetValue = Random.nextInt(0, valueCount * 2)
+        if (targetValue !in otherValues) {
+            break
+        }
+    }
+
+    val result = mutableListOf<Int>()
+    repeat(k) {
+        result.add(targetValue)
+    }
+    repeat(m) {
+        otherValues.forEach {
+            result.add(it)
+        }
+    }
+    result.shuffle()
+
+    return Pair(result.toIntArray(), targetValue)
 }

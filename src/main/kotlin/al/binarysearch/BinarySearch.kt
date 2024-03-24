@@ -30,11 +30,3 @@ fun binarySearch(arr: IntArray, target: Int): Int {
     return -1
 }
 
-/**
- * 无序数组，寻找左右两边值都大于自身的值的索引
- * 根据
- */
-fun localMinimum(arr: IntArray): Int {
-    throw NotImplementedException("")
-}
-

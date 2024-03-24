@@ -1,6 +1,5 @@
 package al.utils
 
-import al.sort.swap
 import al.util.swap1
 import al.util.swap2
 import kotlin.random.Random
