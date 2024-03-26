@@ -1,7 +1,7 @@
 package al.stackorqueue
 
-import jdk.jshell.spi.ExecutionControl.NotImplementedException
-import java.util.Stack
+import al.linkedlist.ListNode
+import java.util.*
 
 /**
  * leetcode 622 设计循环队列
@@ -54,61 +54,124 @@ import java.util.Stack
  */
 class MyCircularQueue(k: Int) {
 
-    // TODO implement 用双向链表实现
+    // 使用单链表实现
+    private var head: ListNode? = null
+    private var tail: ListNode? = null
+    private var size = 0
+    private val capacity = k
 
     fun enQueue(value: Int): Boolean {
-        throw NotImplementedException("")
+        if (isFull()) {
+            return false
+        }
+
+        val newNode = ListNode(value)
+        if (head == null) {
+            tail = newNode
+            head = newNode
+        } else {
+            tail?.next = newNode
+            tail = newNode
+        }
+        size++
+        return true
     }
 
     fun deQueue(): Boolean {
-        throw NotImplementedException("")
+        if (isEmpty()) {
+            return false
+        }
+
+        head = head?.next
+
+        size--
+        return true
     }
 
     fun Front(): Int {
-        throw NotImplementedException("")
+        return head?.`val` ?: -1
     }
 
     fun Rear(): Int {
-        throw NotImplementedException("")
+        return tail?.`val` ?: -1
     }
 
     fun isEmpty(): Boolean {
-        throw NotImplementedException("")
+        return head == null
     }
 
     fun isFull(): Boolean {
-        throw NotImplementedException("")
+        return size >= capacity
     }
 
 }
 
 class MyCircularQueue2(k: Int) {
 
-    // TODO implement 用数组实现
-    // 环形数组
+    private val data = IntArray(k)
+    private var begin = 0
+    private var end = 0
+    private var size = 0
+    private val capacity = k
 
     fun enQueue(value: Int): Boolean {
-        throw NotImplementedException("")
+        if (size >= capacity) return false
+
+        data[end] = value
+        end++
+        size++
+        formalizePointers()
+        return true
+    }
+
+    private fun formalizePointers() {
+        begin = formalizeIndex(begin)
+        end = formalizeIndex(end)
+    }
+
+    private fun formalizeIndex(index: Int): Int {
+        if (index == capacity) {
+            return 0
+        }
+        if (index == -1) {
+            return capacity - 1
+        }
+        return index
     }
 
     fun deQueue(): Boolean {
-        throw NotImplementedException("")
+        if (size <= 0) {
+            return false
+        }
+        data[begin]
+        begin++
+        size--
+        formalizePointers()
+        return true
     }
 
     fun Front(): Int {
-        throw NotImplementedException("")
+        if (isEmpty()) {
+            return -1
+        }
+
+        return data[begin]
     }
 
     fun Rear(): Int {
-        throw NotImplementedException("")
+        if (isEmpty()) {
+            return -1
+        }
+
+        return data[formalizeIndex(end - 1)]
     }
 
     fun isEmpty(): Boolean {
-        throw NotImplementedException("")
+        return size == 0
     }
 
     fun isFull(): Boolean {
-        throw NotImplementedException("")
+        return size == capacity
     }
 
 }

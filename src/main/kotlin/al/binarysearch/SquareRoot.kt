@@ -2,7 +2,7 @@ package al.binarysearch
 
 class SquareRoot {
     /**
-     * leetcode 69.
+     * leetcode-69
      * 小于 n 的最大值
      * 给你一个非负整数 x ，计算并返回 x 的 算术平方根 。
      *

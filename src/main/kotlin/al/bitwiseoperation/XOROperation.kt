@@ -16,7 +16,7 @@ class XOROperation {
         arr[a] = arr[a] xor arr[b]
     }
 
-    // leetcode 136. 如果一个数组中，一个数出现奇数次，其余数都出现了偶数次
+    // leetcode-136 如果一个数组中，一个数出现奇数次，其余数都出现了偶数次
     fun singleNumber(nums: IntArray): Int {
         return nums.reduce { acc, i ->
             acc xor i
@@ -38,7 +38,7 @@ class XOROperation {
     }
 
     /**
-     * leetcode 260. 只出现一次的数字 III
+     * leetcode-260 只出现一次的数字 III
      * 给你一个整数数组 nums，其中恰好有两个元素只出现一次，其余所有元素均出现两次。 找出只出现一次的那两个元素。你可以按 任意顺序 返回答案。
      *
      * 你必须设计并实现线性时间复杂度的算法且仅使用常量额外空间来解决此问题。

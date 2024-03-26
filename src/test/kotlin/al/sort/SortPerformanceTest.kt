@@ -26,6 +26,11 @@ class SortPerformanceTest {
                 0
             ),
             MethodPerformanceData(
+                RecursiveMergeSort()::mergeSort,
+                "mergeSort",
+                0
+            ),
+            MethodPerformanceData(
                 buildInSort,
                 "builtInSort",
                 0

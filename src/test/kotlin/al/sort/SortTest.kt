@@ -36,4 +36,9 @@ class SortTest {
         return isArrayEquals(buildInResult, targetMethodResult)
     }
 
+    @Test
+    fun checkMergeSort() {
+        checkSortResultWithBuildInMethod(RecursiveMergeSort()::mergeSort)
+    }
+
 }

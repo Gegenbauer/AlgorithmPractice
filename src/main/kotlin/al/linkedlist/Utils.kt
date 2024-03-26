@@ -59,6 +59,7 @@ fun isLinkedListEquals(node1: DoubleNode?, node2: DoubleNode?): Boolean {
         if (p.`val` != q.`val`) {
             return false
         }
+        // 为了从尾部重新遍历
         if (p.next == null) {
             tailP = p
         }
@@ -69,36 +70,24 @@ fun isLinkedListEquals(node1: DoubleNode?, node2: DoubleNode?): Boolean {
         q = q.next as? DoubleNode
     }
 
-    while (p != null || q != null) {
-        if (p != null && p.next == null) {
-            tailP = p
-        }
-        if (q != null && q.next == null) {
-            tailQ = q
-        }
-        p = p?.next as? DoubleNode
-        q = q?.next as? DoubleNode
+    // p 或者 q 有一个仍然没有遍历到最后一个节点
+    if (p != null || q != null) {
+        return false
     }
 
-    if (p?.`val` == q?.`val`) {
-        p = tailP
-        q = tailQ
+    p = tailP
+    q = tailQ
 
-        while (p != null && q != null) {
-            if (p.`val` != q.`val`) {
-                return false
-            }
-
-            p = p.last
-            q = q.last
-        }
-
-        if (p?.`val` != q?.`val`) {
+    while (p != null && q != null) {
+        if (p.`val` != q.`val`) {
             return false
         }
+
+        p = p.last
+        q = q.last
     }
 
-    return true
+    return p?.`val` == q?.`val`
 }
 
 fun ListNode?.toIntArray(): IntArray {

@@ -98,7 +98,7 @@ class MyStack2() {
 }
 
 /**
- * 用数组实现
+ * 用数组实现，比较容易
  * 正常使用
  */
 class MyStack3() {
