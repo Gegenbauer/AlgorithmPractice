@@ -9,6 +9,7 @@ class SortPerformanceTest {
 
     @Test
     fun testSortMethodsCost() {
+        initArrCache()
         val methods = listOf(
             MethodPerformanceData(
                 ::selectionSort,
@@ -27,7 +28,17 @@ class SortPerformanceTest {
             ),
             MethodPerformanceData(
                 RecursiveMergeSort()::mergeSort,
-                "mergeSort",
+                "recursiveMergeSort",
+                0
+            ),
+            MethodPerformanceData(
+                IterativeMergeSort()::mergeSort,
+                "iterativeMergeSort",
+                0
+            ),
+            MethodPerformanceData(
+                Code01_MergeSort::mergeSort,
+                "zuoSort",
                 0
             ),
             MethodPerformanceData(
@@ -38,8 +49,8 @@ class SortPerformanceTest {
         )
 
         val randomArrays = mutableListOf<IntArray>().apply {
-            repeat(10000) {
-                add(generateRandomArray(1000))
+            repeat(100) {
+                add(generateRandomArray(10000))
             }
         }
         methods.forEach {

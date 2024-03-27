@@ -41,4 +41,9 @@ class SortTest {
         checkSortResultWithBuildInMethod(RecursiveMergeSort()::mergeSort)
     }
 
+    @Test
+    fun checkIterativeMergeSort() {
+        checkSortResultWithBuildInMethod(IterativeMergeSort()::mergeSort)
+    }
+
 }
