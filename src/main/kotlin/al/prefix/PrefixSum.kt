@@ -1,4 +1,4 @@
-package al.prefixsum
+package al.prefix
 
 /**
  * 前缀和，是一种常用的算法技巧，用来计算数组或者列表中的区间和问题

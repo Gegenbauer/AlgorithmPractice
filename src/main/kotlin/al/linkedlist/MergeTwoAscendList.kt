@@ -31,18 +31,13 @@ fun mergeTwoLists(list1: ListNode?, list2: ListNode?): ListNode? {
     var q: ListNode? = list1
     var p: ListNode? = list2
 
-    var resultListCur: ListNode? = null
-    var resultListHead: ListNode? = null
+    val dummy = ListNode(0)
+    var resultCur = dummy
 
     fun addNode(value: Int) {
         val newNode = ListNode(value)
-        if (resultListHead == null) {
-            resultListHead = newNode
-            resultListCur = resultListHead
-        } else {
-            resultListCur!!.next = newNode
-            resultListCur = newNode
-        }
+        resultCur.next = newNode
+        resultCur = newNode
     }
 
     while (q != null && p != null) {
@@ -71,5 +66,5 @@ fun mergeTwoLists(list1: ListNode?, list2: ListNode?): ListNode? {
     addListToResult(q)
     addListToResult(p)
 
-    return resultListHead
+    return dummy.next
 }

@@ -15,9 +15,14 @@ fun isArrayEquals(arr1: IntArray, arr2: IntArray): Boolean {
     return true
 }
 
-fun generateRandomArray(size: Int, maxValue: Int = size, isPositive: Boolean = false): IntArray {
+fun generateRandomArray(size: Int, maxValue: Int = size, isPositive: Boolean = false, nonZero: Boolean = false): IntArray {
     return IntArray(size) {
-        Random.nextInt(if (isPositive) 0 else -maxValue, maxValue)
+        val start = when {
+            isPositive && nonZero -> 1
+            isPositive -> 0
+            else -> -maxValue
+        }
+        Random.nextInt(start, maxValue)
     }
 }
 

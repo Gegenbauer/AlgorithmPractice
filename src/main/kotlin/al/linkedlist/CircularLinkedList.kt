@@ -11,10 +11,9 @@ package al.linkedlist
  * 快慢指针
  */
 fun hasCycle(head: ListNode?): Boolean {
-    if (head?.next == null) return false
-
-    var p = head
-    var q = head.next
+    val dummy = ListNode(0, head)
+    var p: ListNode? = dummy
+    var q: ListNode? = dummy.next
 
     while (p != null && q != null) {
         if (p == q) {
