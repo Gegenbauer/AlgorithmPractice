@@ -1,5 +1,8 @@
 package al.sort.heap
 
+import java.util.PriorityQueue
+import kotlin.math.max
+
 /**
  * 最大线段重合数
  *
@@ -7,7 +10,7 @@ package al.sort.heap
  * 左右都是闭区间
  * 规定：
  * 1) 线段的开始和结束位置一定都是整数值
- * 2) 线段重合区域的长度必须 >= 1，指重合一个点不满足要求
+ * 2) 线段重合区域的长度必须 >= 1，只重合一个点不满足要求
  * 返回线段最多重合区域中，包含了几条线段
  *
  * [1, 2] 和 [2, 4] 没有重合区域
@@ -22,8 +25,28 @@ package al.sort.heap
  * 1. 将线段按起始点排序
  * 2. 维护一个小根堆，遍历每个线段
  * 弹出堆中小于等于线段左边界的值，并将线段右边界放入堆
- * 3. 此时堆中剩余的值的数量，就是此时的重合线段数量
+ * 3. 此时堆中剩余的值的数量，就表示以这个线段左边界为界，有多少条线段穿过这个边界
+ * 也就是包含这个线段左边界的重合线段数
  *
  */
 class MaximumOverlappingSegments {
+
+    /**
+     * 线段数量 n，线段最大
+     * 整体时间复杂度 O(N * logN)
+     */
+    fun maxCover(lines: Array<Array<Int>>): Int {
+        lines.sortedBy { it[0] } // 排序：O(N * logN)
+
+        var ans = 0
+        val minHeap = PriorityQueue<Int>()
+        lines.forEach { // N
+            while (minHeap.isNotEmpty() && minHeap.peek() <= it[0]) {
+                minHeap.poll() // logN 整个过程最多执行 N 次
+            }
+            minHeap.add(it[1]) // logN
+            ans = max(ans, minHeap.size)
+        }
+        return 0
+    }
 }

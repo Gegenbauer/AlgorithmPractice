@@ -1,7 +1,5 @@
 package al.linkedlist
 
-import jdk.jshell.spi.ExecutionControl.NotImplementedException
-
 
 fun IntArray.toSingleNodeLinkedList(): ListNode? {
     if (isEmpty()) return null
@@ -32,7 +30,7 @@ fun IntArray.toDoubleNodeLinkedList(): DoubleNode? {
 }
 
 fun Array<String>.toSingleNodeLinkedList(): ListNode? {
-    throw NotImplementedException("")
+    TODO()
 }
 
 fun isLinkedListEquals(node1: ListNode?, node2: ListNode?): Boolean {

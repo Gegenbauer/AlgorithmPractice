@@ -40,6 +40,6 @@ class GoodNumberPair {
         val occurrences = hashMapOf<Int, Int>() // 每个值出现的次数
 
         nums.forEach { occurrences[it] = (occurrences[it] ?: 0) + 1 }
-        return occurrences.values.sumOf { (it * (it - 1)) shr 1 }
+        return occurrences.values.sumOf { (it * (it - 1)) shr 1 } // C(8, 2)
     }
 }

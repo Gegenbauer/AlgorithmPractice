@@ -36,15 +36,15 @@ class QuickSort {
 
         while (cur < largeBound) {
             if (arr[cur] < pivot) {
-                swap(++smallBound, cur++, arr)
+                swap(arr, ++smallBound, cur++)
             } else if (arr[cur] > pivot) {
-                swap(--largeBound, cur, arr)
+                swap(arr, --largeBound, cur)
             } else {
                 cur++
             }
         }
 
-        swap(largeBound, end, arr) // 要记得把最后一个数交换到大于区域的第一个值
+        swap(arr, largeBound, end) // 要记得把最后一个数交换到大于区域的第一个值
         return smallBound + 1 to largeBound
     }
 
@@ -63,7 +63,7 @@ class QuickSort {
             return
         }
 
-        swap(Random.nextInt(start, end), end, arr)
+        swap(arr, Random.nextInt(start, end), end)
         val interval = partition(arr, start, end)
         sort(arr, start, interval.first - 1)
         sort(arr, interval.second + 1, end)
@@ -76,7 +76,7 @@ class QuickSort {
         if (arr.size < 2) return
 
         val ops = Stack<Op>()
-        swap(Random.nextInt(0, arr.lastIndex), arr.lastIndex, arr)
+        swap(arr, Random.nextInt(0, arr.lastIndex), arr.lastIndex)
         val initialInterval = partition(arr, 0, arr.lastIndex)
         ops.push(Op(0, initialInterval.first - 1))
         ops.push(Op(initialInterval.second + 1, arr.lastIndex))
@@ -84,7 +84,7 @@ class QuickSort {
         while (ops.isNotEmpty()) {
             val op = ops.pop()
             if (op.start >= op.end) continue
-            swap(Random.nextInt(op.start, op.end), op.end, arr)
+            swap(arr, Random.nextInt(op.start, op.end), op.end)
             val interval = partition(arr, op.start, op.end)
             if (interval.second > interval.first) {
                 ops.push(Op(op.start, interval.first - 1))

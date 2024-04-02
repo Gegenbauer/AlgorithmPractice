@@ -15,292 +15,136 @@ class SortPerformanceTest {
 
     @Test
     fun testBubbleSort() {
-        val methods = listOf(
-            MethodPerformanceData(
-                ::bubbleSort,
-                "bubbleSort",
-            )
+        val method = MethodPerformanceData(
+            ::bubbleSort,
+            "bubbleSort",
         )
 
-        val randomArrays = mutableListOf<IntArray>().apply {
-            repeat(REPEAT_COUNT) {
-                add(generateRandomArray(ARRAY_SIZE))
-            }
-        }
-        methods.forEach {
-            val cost = measureTimeMillis {
-                randomArrays.forEach { arr ->
-                    testSortMethodPerformance(arr, it.method)
-                }
-            }
-            it.averageCost = cost
-        }
 
-        methods.sortedBy { it.averageCost }
-        methods.forEach {
-            println("method ${it.methodName} cost ${it.averageCost}")
+        val cost = sortRandomArrays(method.method, REPEAT_COUNT, ARRAY_SIZE)
+
+        println("method ${method.methodName} cost $cost")
+    }
+
+    private fun sortRandomArrays(method: (IntArray) -> Unit, repeatCount: Int, arrSize: Int): Long {
+        val randomArrays = mutableListOf<IntArray>().apply {
+            repeat(repeatCount) {
+                add(generateRandomArray(arrSize))
+            }
+        }
+        return measureTimeMillis {
+            randomArrays.forEach { arr ->
+                testSortMethodPerformance(arr, method)
+            }
         }
     }
 
     @Test
     fun testInsertSort() {
-        val methods = listOf(
-            MethodPerformanceData(
-                ::insertSort,
-                "insertSort",
-            ),
+        val method = MethodPerformanceData(
+            ::insertSort,
+            "insertSort",
         )
 
-        val randomArrays = mutableListOf<IntArray>().apply {
-            repeat(REPEAT_COUNT) {
-                add(generateRandomArray(ARRAY_SIZE))
-            }
-        }
-        methods.forEach {
-            val cost = measureTimeMillis {
-                randomArrays.forEach { arr ->
-                    testSortMethodPerformance(arr, it.method)
-                }
-            }
-            it.averageCost = cost
-        }
+        val cost = sortRandomArrays(method.method, REPEAT_COUNT, ARRAY_SIZE)
 
-        methods.sortedBy { it.averageCost }
-        methods.forEach {
-            println("method ${it.methodName} cost ${it.averageCost}")
-        }
+        println("method ${method.methodName} cost $cost")
     }
 
     @Test
     fun testSelectionSort() {
-        val methods = listOf(
-            MethodPerformanceData(
-                ::selectionSort,
-                "selectionSort",
-            ),
+        val method = MethodPerformanceData(
+            ::selectionSort,
+            "selectionSort",
         )
 
-        val randomArrays = mutableListOf<IntArray>().apply {
-            repeat(REPEAT_COUNT) {
-                add(generateRandomArray(ARRAY_SIZE))
-            }
-        }
-        methods.forEach {
-            val cost = measureTimeMillis {
-                randomArrays.forEach { arr ->
-                    testSortMethodPerformance(arr, it.method)
-                }
-            }
-            it.averageCost = cost
-        }
+        val cost = sortRandomArrays(method.method, REPEAT_COUNT, ARRAY_SIZE)
 
-        methods.sortedBy { it.averageCost }
-        methods.forEach {
-            println("method ${it.methodName} cost ${it.averageCost}")
-        }
+        println("method ${method.methodName} cost $cost")
     }
 
     @Test
     fun testMergeSort() {
-        val methods = listOf(
-            MethodPerformanceData(
-                IterativeMergeSort()::mergeSort,
-                "mergeSort",
-            ),
+        val method = MethodPerformanceData(
+            IterativeMergeSort()::mergeSort,
+            "mergeSort",
         )
 
-        val randomArrays = mutableListOf<IntArray>().apply {
-            repeat(REPEAT_COUNT) {
-                add(generateRandomArray(ARRAY_SIZE))
-            }
-        }
-        methods.forEach {
-            val cost = measureTimeMillis {
-                randomArrays.forEach { arr ->
-                    testSortMethodPerformance(arr, it.method)
-                }
-            }
-            it.averageCost = cost
-        }
+        val cost = sortRandomArrays(method.method, REPEAT_COUNT, ARRAY_SIZE)
 
-        methods.sortedBy { it.averageCost }
-        methods.forEach {
-            println("method ${it.methodName} cost ${it.averageCost}")
-        }
+        println("method ${method.methodName} cost $cost")
     }
 
     @Test
     fun testQuickSort() {
-        val methods = listOf(
-            MethodPerformanceData(
-                QuickSort()::sort,
-                "quickSort",
-            ),
+        val method = MethodPerformanceData(
+            QuickSort()::sort,
+            "quickSort",
         )
 
-        val randomArrays = mutableListOf<IntArray>().apply {
-            repeat(REPEAT_COUNT) {
-                add(generateRandomArray(ARRAY_SIZE))
-            }
-        }
-        methods.forEach {
-            val cost = measureTimeMillis {
-                randomArrays.forEach { arr ->
-                    testSortMethodPerformance(arr, it.method)
-                }
-            }
-            it.averageCost = cost
-        }
+        val cost = sortRandomArrays(method.method, REPEAT_COUNT, ARRAY_SIZE)
 
-        methods.sortedBy { it.averageCost }
-        methods.forEach {
-            println("method ${it.methodName} cost ${it.averageCost}")
-        }
+        println("method ${method.methodName} cost $cost")
     }
 
     @Test
     fun testQuickSort2() {
-        val methods = listOf(
-            MethodPerformanceData(
-                QuickSort()::sort2,
-                "quickSort2",
-            ),
+        val method = MethodPerformanceData(
+            QuickSort()::sort2,
+            "quickSort2",
         )
 
-        val randomArrays = mutableListOf<IntArray>().apply {
-            repeat(REPEAT_COUNT) {
-                add(generateRandomArray(ARRAY_SIZE))
-            }
-        }
-        methods.forEach {
-            val cost = measureTimeMillis {
-                randomArrays.forEach { arr ->
-                    testSortMethodPerformance(arr, it.method)
-                }
-            }
-            it.averageCost = cost
-        }
+        val cost = sortRandomArrays(method.method, REPEAT_COUNT, ARRAY_SIZE)
 
-        methods.sortedBy { it.averageCost }
-        methods.forEach {
-            println("method ${it.methodName} cost ${it.averageCost}")
-        }
+        println("method ${method.methodName} cost $cost")
     }
 
     @Test
     fun testQuickSort3() {
-        val methods = listOf(
-            MethodPerformanceData(
-                QuickSort()::sort3,
-                "quickSort3",
-            ),
+        val method = MethodPerformanceData(
+            QuickSort()::sort3,
+            "quickSort3",
         )
 
-        val randomArrays = mutableListOf<IntArray>().apply {
-            repeat(REPEAT_COUNT) {
-                add(generateRandomArray(ARRAY_SIZE))
-            }
-        }
-        methods.forEach {
-            val cost = measureTimeMillis {
-                randomArrays.forEach { arr ->
-                    testSortMethodPerformance(arr, it.method)
-                }
-            }
-            it.averageCost = cost
-        }
+        val cost = sortRandomArrays(method.method, REPEAT_COUNT, ARRAY_SIZE)
 
-        methods.sortedBy { it.averageCost }
-        methods.forEach {
-            println("method ${it.methodName} cost ${it.averageCost}")
-        }
+        println("method ${method.methodName} cost $cost")
     }
 
     @Test
     fun testZuoQuickSort() {
-        val methods = listOf(
-            MethodPerformanceData(
-                Code06_QuickSort::quickSort,
-                "zuoQuickSort",
-            ),
+        val method = MethodPerformanceData(
+            Code06_QuickSort::quickSort,
+            "zuoQuickSort",
         )
 
-        val randomArrays = mutableListOf<IntArray>().apply {
-            repeat(REPEAT_COUNT) {
-                add(generateRandomArray(ARRAY_SIZE))
-            }
-        }
-        methods.forEach {
-            val cost = measureTimeMillis {
-                randomArrays.forEach { arr ->
-                    testSortMethodPerformance(arr, it.method)
-                }
-            }
-            it.averageCost = cost
-        }
+        val cost = sortRandomArrays(method.method, REPEAT_COUNT, ARRAY_SIZE)
 
-        methods.sortedBy { it.averageCost }
-        methods.forEach {
-            println("method ${it.methodName} cost ${it.averageCost}")
-        }
+        println("method ${method.methodName} cost $cost")
     }
 
     @Test
     fun testHeapSort() {
-        val methods = listOf(
-            MethodPerformanceData(
-                HeapSort()::sort2,
-                "heapSort",
-            ),
+        val method = MethodPerformanceData(
+            HeapSort()::sort2,
+            "heapSort",
         )
 
-        val randomArrays = mutableListOf<IntArray>().apply {
-            repeat(REPEAT_COUNT) {
-                add(generateRandomArray(ARRAY_SIZE))
-            }
-        }
-        methods.forEach {
-            val cost = measureTimeMillis {
-                randomArrays.forEach { arr ->
-                    testSortMethodPerformance(arr, it.method)
-                }
-            }
-            it.averageCost = cost
-        }
+        val cost = sortRandomArrays(method.method, REPEAT_COUNT, ARRAY_SIZE)
 
-        methods.sortedBy { it.averageCost }
-        methods.forEach {
-            println("method ${it.methodName} cost ${it.averageCost}")
-        }
+        println("method ${method.methodName} cost $cost")
     }
 
     @Test
     fun testBuildInSort() {
-        val methods = listOf(
-            MethodPerformanceData(
-                buildInSort,
-                "buildInSort",
-            ),
+        val method = MethodPerformanceData(
+            buildInSort,
+            "buildInSort",
         )
 
-        val randomArrays = mutableListOf<IntArray>().apply {
-            repeat(REPEAT_COUNT) {
-                add(generateRandomArray(ARRAY_SIZE))
-            }
-        }
-        methods.forEach {
-            val cost = measureTimeMillis {
-                randomArrays.forEach { arr ->
-                    testSortMethodPerformance(arr, it.method)
-                }
-            }
-            it.averageCost = cost
-        }
+        val cost = sortRandomArrays(method.method, REPEAT_COUNT, ARRAY_SIZE)
 
-        methods.sortedBy { it.averageCost }
-        methods.forEach {
-            println("method ${it.methodName} cost ${it.averageCost}")
-        }
+        println("method ${method.methodName} cost $cost")
     }
 
     private val buildInSort: ((IntArray) -> Unit) = {
@@ -316,7 +160,6 @@ class SortPerformanceTest {
     private data class MethodPerformanceData(
         val method: (IntArray) -> Unit,
         val methodName: String,
-        var averageCost: Long = 0
     )
 
     companion object {

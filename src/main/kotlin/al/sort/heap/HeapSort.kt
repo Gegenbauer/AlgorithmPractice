@@ -30,7 +30,7 @@ class HeapSort {
         var size = arr.size
         // O(N * logN)
         while (size > 0) { // O(N)
-            swap(0, (size--) - 1, arr) // O(1)
+            swap(arr, 0, (size--) - 1) // O(1)
             checkChildren(arr, 0, size) // O(logN)
         }
     }
@@ -46,7 +46,7 @@ class HeapSort {
         var size = arr.size
         // O(N * logN)
         while (size > 0) { // O(N)
-            swap(0, (size--) - 1, arr) // O(1)
+            swap(arr, 0, (size--) - 1) // O(1)
             checkChildren(arr, 0, size) // O(logN)
         }
     }
@@ -61,7 +61,7 @@ class HeapSort {
         while (cur > 0) {
             val parent = (cur - 1) / 2
             if (arr[cur] > arr[parent]) {
-                swap(cur, parent, arr)
+                swap(arr, cur, parent)
                 cur = parent
             } else {
                 break
@@ -84,7 +84,7 @@ class HeapSort {
                 left
             }
             if (arr[maxChild] > arr[cur]) { // 如果子节点更大，则交换
-                swap(maxChild, cur, arr)
+                swap(arr, maxChild, cur)
                 cur = maxChild
             } else {
                 break

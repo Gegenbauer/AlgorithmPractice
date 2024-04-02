@@ -63,9 +63,9 @@ class NetherlandsFlags {
 
         while (cur < largeBound) {
             if (nums[cur] < 1) {
-                swap(cur++, ++smallBound, nums)
+                swap(nums, cur++, ++smallBound)
             } else if (nums[cur] > 1) {
-                swap(cur, --largeBound, nums)
+                swap(nums, cur, --largeBound)
             } else {
                 cur++
             }

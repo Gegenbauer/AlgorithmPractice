@@ -1,6 +1,12 @@
 package al.sort.simple
 
-fun swap(index1: Int, index2: Int, arr: IntArray) {
+fun swap(arr: IntArray, index1: Int, index2: Int) {
+    val temp = arr[index2]
+    arr[index2] = arr[index1]
+    arr[index1] = temp
+}
+
+fun swap(arr: Array<Any?>, index1: Int, index2: Int) {
     val temp = arr[index2]
     arr[index2] = arr[index1]
     arr[index1] = temp
@@ -24,7 +30,7 @@ fun selectionSort(arr: IntArray) {
                 minValueIndexInSubArray
             }
         }
-        swap(minValueIndexInSubArray, index, arr)
+        swap(arr, minValueIndexInSubArray, index)
     }
 }
 
@@ -41,7 +47,7 @@ fun bubbleSort(arr: IntArray) {
         for (innerIndex in 1..index) { // 进行冒泡
 
             if (arr[innerIndex - 1] > arr[innerIndex]) {
-                swap(innerIndex - 1, innerIndex, arr)
+                swap(arr, innerIndex - 1, innerIndex)
                 isArrayFullySorted = false
             }
         }
@@ -64,7 +70,7 @@ fun insertSort(arr: IntArray) {
 
         for (innerIndex in index - 1 downTo 0) {
             if (arr[innerIndex + 1] < arr[innerIndex]) {
-                swap(innerIndex + 1, innerIndex, arr)
+                swap(arr, innerIndex + 1, innerIndex)
             } else {
                 break
             }
