@@ -1,4 +1,4 @@
-package al.sort
+package al.sort.merge
 
 class CountOfRangeSum {
 

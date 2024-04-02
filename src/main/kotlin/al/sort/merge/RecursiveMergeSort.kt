@@ -1,20 +1,8 @@
-package al.sort
+package al.sort.merge
 
 /**
  * 让数组在 L-M 有序，在
  */
-
-private val arrCache = hashMapOf<Int, IntArray>()
-
-fun initArrCache() {
-    for (i in 0..1000) {
-        arrCache[i] = IntArray(i)
-    }
-}
-
-private fun getArr(size: Int): IntArray {
-    return arrCache[size]!!
-}
 
 class RecursiveMergeSort {
 
@@ -40,7 +28,6 @@ class RecursiveMergeSort {
 
 private fun merge(arr: IntArray, start: Int, mid: Int, end: Int) {
     val help = IntArray(end - start + 1)
-//    val help = getArr(end - start + 1)
 
     var index1 = start
     var index2 = mid + 1
@@ -80,8 +67,8 @@ class IterativeMergeSort {
         var mergeSize = 1
         while (mergeSize < arr.size) {
             for (l in arr.indices step mergeSize * 2) {
-                val r = (l + mergeSize * 2).coerceAtMost(arr.lastIndex)
-                val mid = (l + mergeSize).coerceAtMost(arr.lastIndex)
+                val r = (l + mergeSize * 2 - 1).coerceAtMost(arr.lastIndex)
+                val mid = (l + mergeSize - 1).coerceAtMost(arr.lastIndex) // mid 必须为上一次步长的 r
 
                 merge(arr, l, mid, r)
             }
@@ -92,7 +79,6 @@ class IterativeMergeSort {
 
     private fun merge(arr: IntArray, l: Int, mid: Int, r: Int) {
         val help = IntArray(r - l + 1)
-//        val help = getArr(r - l + 1)
         var helpIndex = 0
         var leftIndex = l
         var rightIndex = mid + 1

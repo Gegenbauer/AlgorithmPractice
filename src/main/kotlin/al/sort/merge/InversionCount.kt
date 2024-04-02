@@ -1,4 +1,4 @@
-package al.sort
+package al.sort.merge
 
 /**
  * leetcode LCR-170 交易逆序对的总数

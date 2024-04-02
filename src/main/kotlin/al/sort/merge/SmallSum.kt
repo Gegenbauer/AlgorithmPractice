@@ -1,4 +1,4 @@
-package al.sort
+package al.sort.merge
 
 /**
  * 小和的定义，就是每个数左边比它小的数累加的和，整体再计算累加和。

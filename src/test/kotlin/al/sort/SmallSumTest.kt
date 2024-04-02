@@ -1,5 +1,6 @@
 package al.sort
 
+import al.sort.merge.SmallSum
 import al.utils.generateRandomArray
 import kotlin.random.Random
 import kotlin.test.Test

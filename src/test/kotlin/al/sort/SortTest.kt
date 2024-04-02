@@ -1,5 +1,12 @@
 package al.sort
 
+import al.sort.heap.HeapSort
+import al.sort.merge.IterativeMergeSort
+import al.sort.merge.RecursiveMergeSort
+import al.sort.quick.QuickSort
+import al.sort.simple.bubbleSort
+import al.sort.simple.insertSort
+import al.sort.simple.selectionSort
 import al.utils.generateRandomArray
 import al.utils.isArrayEquals
 import kotlin.test.Test
@@ -30,20 +37,35 @@ class SortTest {
 
     private fun checkSortResultWithBuildInMethod(method: (IntArray) -> Unit): Boolean {
         val targetMethodResult = generateRandomArray(1000)
+        val copy = targetMethodResult.copyOf()
         val buildInResult = targetMethodResult.copyOf()
         method(targetMethodResult)
         buildInResult.sort()
-        return isArrayEquals(buildInResult, targetMethodResult)
+        return isArrayEquals(buildInResult, targetMethodResult).also {
+            if (it.not()) {
+                println(copy.contentToString())
+            }
+        }
     }
 
     @Test
     fun checkMergeSort() {
-        checkSortResultWithBuildInMethod(RecursiveMergeSort()::mergeSort)
+        assertTrue(checkSortResultWithBuildInMethod(RecursiveMergeSort()::mergeSort))
     }
 
     @Test
     fun checkIterativeMergeSort() {
-        checkSortResultWithBuildInMethod(IterativeMergeSort()::mergeSort)
+        assertTrue(checkSortResultWithBuildInMethod(IterativeMergeSort()::mergeSort))
+    }
+
+    @Test
+    fun checkQuickSort() {
+        assertTrue(checkSortResultWithBuildInMethod(QuickSort()::sort))
+    }
+
+    @Test
+    fun checkHeapSort() {
+        assertTrue(checkSortResultWithBuildInMethod(HeapSort()::sort2))
     }
 
 }

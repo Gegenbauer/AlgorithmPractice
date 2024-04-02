@@ -1,5 +1,6 @@
 package al.sort
 
+import al.sort.merge.CountOfRangeSum
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

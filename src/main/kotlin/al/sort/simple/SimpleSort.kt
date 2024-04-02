@@ -1,4 +1,4 @@
-package al.sort
+package al.sort.simple
 
 fun swap(index1: Int, index2: Int, arr: IntArray) {
     val temp = arr[index2]
