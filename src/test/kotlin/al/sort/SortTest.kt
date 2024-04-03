@@ -3,6 +3,8 @@ package al.sort
 import al.sort.heap.HeapSort
 import al.sort.merge.IterativeMergeSort
 import al.sort.merge.RecursiveMergeSort
+import al.sort.noncomparison.CountSort
+import al.sort.noncomparison.RadixSort
 import al.sort.quick.QuickSort
 import al.sort.simple.bubbleSort
 import al.sort.simple.insertSort
@@ -35,8 +37,8 @@ class SortTest {
         }
     }
 
-    private fun checkSortResultWithBuildInMethod(method: (IntArray) -> Unit): Boolean {
-        val targetMethodResult = generateRandomArray(1000)
+    private fun checkSortResultWithBuildInMethod(method: (IntArray) -> Unit, positive: Boolean = false): Boolean {
+        val targetMethodResult = generateRandomArray(1000, isPositive = positive)
         val copy = targetMethodResult.copyOf()
         val buildInResult = targetMethodResult.copyOf()
         method(targetMethodResult)
@@ -49,7 +51,7 @@ class SortTest {
     }
 
     @Test
-    fun checkMergeSort() {
+    fun checkRecursiveMergeSort() {
         assertTrue(checkSortResultWithBuildInMethod(RecursiveMergeSort()::mergeSort))
     }
 
@@ -66,6 +68,21 @@ class SortTest {
     @Test
     fun checkHeapSort() {
         assertTrue(checkSortResultWithBuildInMethod(HeapSort()::sort2))
+    }
+
+    @Test
+    fun checkCountSort() {
+        assertTrue(checkSortResultWithBuildInMethod(CountSort()::sort))
+    }
+
+    @Test
+    fun checkRadixSort() {
+        assertTrue(checkSortResultWithBuildInMethod(RadixSort()::sort, true))
+    }
+
+    @Test
+    fun checkRadixSort2() {
+        assertTrue(checkSortResultWithBuildInMethod(RadixSort()::sort2, true))
     }
 
 }

@@ -29,26 +29,26 @@ class RecursiveMergeSort {
 private fun merge(arr: IntArray, start: Int, mid: Int, end: Int) {
     val help = IntArray(end - start + 1)
 
-    var index1 = start
-    var index2 = mid + 1
+    var leftIndex = start
+    var rightIndex = mid + 1
     var helpIndex = 0
 
-    while (index1 <= mid && index2 <= end) {
-        if (arr[index1] < arr[index2]) {
-            help[helpIndex++] = arr[index1]
-            index1++
+    while (leftIndex <= mid && rightIndex <= end) {
+        // 相等时应该取左边元素，保证排序稳定性
+        // 但是 merge 的具体应用时，可能无法保证稳定性
+        if (arr[leftIndex] <= arr[rightIndex]) {
+            help[helpIndex++] = arr[leftIndex++]
         } else {
-            help[helpIndex++] = arr[index2]
-            index2++
+            help[helpIndex++] = arr[rightIndex++]
         }
     }
 
-    while (index1 <= mid) {
-        help[helpIndex++] = arr[index1++]
+    while (leftIndex <= mid) {
+        help[helpIndex++] = arr[leftIndex++]
     }
 
-    while (index2 <= end) {
-        help[helpIndex++] = arr[index2++]
+    while (rightIndex <= end) {
+        help[helpIndex++] = arr[rightIndex++]
     }
 
     for (i in start..end) {
@@ -74,33 +74,6 @@ class IterativeMergeSort {
             }
 
             mergeSize = mergeSize shl 1
-        }
-    }
-
-    private fun merge(arr: IntArray, l: Int, mid: Int, r: Int) {
-        val help = IntArray(r - l + 1)
-        var helpIndex = 0
-        var leftIndex = l
-        var rightIndex = mid + 1
-
-        while (leftIndex <= mid && rightIndex <= r) {
-            help[helpIndex++] = if (arr[leftIndex] < arr[rightIndex]) {
-                arr[leftIndex++]
-            } else {
-                arr[rightIndex++]
-            }
-        }
-
-        while (leftIndex <= mid) {
-            help[helpIndex++] = arr[leftIndex++]
-        }
-
-        while (rightIndex <= r) {
-            help[helpIndex++] = arr[rightIndex++]
-        }
-
-        for (i in help.indices) {
-            arr[l + i] = help[i]
         }
     }
 }
