@@ -6,6 +6,12 @@ fun swap(arr: IntArray, index1: Int, index2: Int) {
     arr[index1] = temp
 }
 
+fun swap(arr: MutableList<Int>, index1: Int, index2: Int) {
+    val temp = arr[index2]
+    arr[index2] = arr[index1]
+    arr[index1] = temp
+}
+
 fun swap(arr: Array<Any?>, index1: Int, index2: Int) {
     val temp = arr[index2]
     arr[index2] = arr[index1]

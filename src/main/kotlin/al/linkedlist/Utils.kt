@@ -1,6 +1,9 @@
 package al.linkedlist
 
 
+/**
+ * 尾插法
+ */
 fun IntArray.toSingleNodeLinkedList(): ListNode? {
     if (isEmpty()) return null
     val head = ListNode(get(0))
@@ -12,6 +15,10 @@ fun IntArray.toSingleNodeLinkedList(): ListNode? {
         cur = node
     }
     return head
+}
+
+fun List<Int>.toSingleNodeLinkedList(): ListNode? {
+    return toIntArray().toSingleNodeLinkedList()
 }
 
 fun IntArray.toDoubleNodeLinkedList(): DoubleNode? {

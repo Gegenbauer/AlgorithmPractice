@@ -14,6 +14,23 @@ open class ListNode(
     var next: ListNode? = null
 )
 
+inline fun ListNode?.foreach(block: (ListNode) -> Unit) {
+    var cur: ListNode? = this
+    while (cur != null) {
+        block(cur)
+        cur = cur.next
+    }
+}
+
+inline fun ListNode?.foreachIndex(block: (Int, ListNode) -> Unit) {
+    var cur: ListNode? = this
+    var index = 0
+    while (cur != null) {
+        block(index++, cur)
+        cur = cur.next
+    }
+}
+
 class DoubleNode(
     value: Int,
     next: DoubleNode? = null,

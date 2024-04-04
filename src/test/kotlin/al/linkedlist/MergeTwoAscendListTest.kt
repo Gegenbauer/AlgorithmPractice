@@ -15,7 +15,7 @@ class MergeTwoAscendListTest {
 
     @Test
     fun `should return correct list when one list is empty`() {
-        val listNotEmpty = generateRandomArray(100, 100).sorted().toIntArray().toSingleNodeLinkedList()
+        val listNotEmpty = generateRandomArray(100, 100).sorted().toSingleNodeLinkedList()
         assertTrue(
             isLinkedListEquals(
                 mergeTwoLists(listNotEmpty, IntArray(0).toSingleNodeLinkedList()),
@@ -26,9 +26,9 @@ class MergeTwoAscendListTest {
 
     @Test
     fun `should return correct list when two list are not empty`() {
-        val list1 = generateRandomArray(100, 100).sorted().toIntArray().toSingleNodeLinkedList()
-        val list2 = generateRandomArray(100, 100).sorted().toIntArray().toSingleNodeLinkedList()
-        val real = (list1.toIntArray() + list2.toIntArray()).sorted().toIntArray().toSingleNodeLinkedList()
+        val list1 = generateRandomArray(100, 100).sorted().toSingleNodeLinkedList()
+        val list2 = generateRandomArray(100, 100).sorted().toSingleNodeLinkedList()
+        val real = (list1.toIntArray() + list2.toIntArray()).sorted().toSingleNodeLinkedList()
 
         assertTrue(isLinkedListEquals(mergeTwoLists(list1 , list2), real))
     }

@@ -12,10 +12,10 @@ class DeleteDuplicatesTest {
     @Test
     fun testRandomArrays() {
         repeat(1000) {
-            val arr = generateRandomArray(100, 30, true).sorted().toIntArray()
+            val arr = generateRandomArray(100, 30, true).sorted()
             val list = arr.toSingleNodeLinkedList()
             deleteDuplicates(list)
-            assertTrue(isLinkedListEquals(list, arr.distinct().toIntArray().toSingleNodeLinkedList()))
+            assertTrue(isLinkedListEquals(list, arr.distinct().toSingleNodeLinkedList()))
         }
     }
 }

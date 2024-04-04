@@ -1,5 +1,6 @@
-package al.twosum
+package al.other
 
+import al.others.Solution
 import al.utils.isArrayEquals
 import kotlin.test.Test
 import kotlin.test.assertTrue

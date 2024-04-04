@@ -1,4 +1,4 @@
-package al.twosum
+package al.others
 
 import kotlin.math.max
 import kotlin.math.min

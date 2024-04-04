@@ -25,6 +25,8 @@ fun getIntersectionNode(headA: ListNode?, headB: ListNode?): ListNode? {
     var p = headA
     var q = headB
 
+    listOf(1, 2)
+
     while (!(p == null && q == null)) {
         if (p == null) {
             p = headB
@@ -39,4 +41,12 @@ fun getIntersectionNode(headA: ListNode?, headB: ListNode?): ListNode? {
         q = q.next
     }
     return null
+}
+
+/**
+ * 如果两个链表可能有环
+ * 则不能通过遍历两条链表长度实现
+ */
+fun getIntersectionNode2(headA: ListNode?, headB: ListNode?): ListNode? {
+    TODO()
 }

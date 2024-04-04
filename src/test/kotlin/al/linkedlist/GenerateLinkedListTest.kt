@@ -51,7 +51,7 @@ class GenerateLinkedListTest {
             val size = Random.nextInt(1, 100)
             val arr = generateRandomArray(size, size)
             val linkedList1 = arr.toSingleNodeLinkedList()
-            val linkedList2 = arr.dropLast(1).toIntArray().toSingleNodeLinkedList()
+            val linkedList2 = arr.dropLast(1).toSingleNodeLinkedList()
 
             assertFalse(isLinkedListEquals(linkedList1, linkedList2), "arr=${arr.contentToString()}")
         }
