@@ -22,4 +22,17 @@ class DeleteTargetNode {
         }
         return dummy.next
     }
+
+    fun removeElement(head: ListNode?, target: ListNode): ListNode? {
+        TODO()
+    }
+
+    /**
+     * 不给头节点
+     * 如果要删除的是末尾节点，是无法做到让其前一个节点指向空的
+     * 所以要求不能是删除末尾节点。
+     */
+    fun removeElement(target: ListNode): ListNode? {
+        TODO()
+    }
 }
