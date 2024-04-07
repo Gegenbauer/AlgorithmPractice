@@ -3,10 +3,24 @@ package al.binarytree
 import java.util.*
 
 class TreeNode(
-    var `val`: Int,
-    var left: TreeNode? = null,
-    var right: TreeNode? = null
+    @JvmField var `val`: Int,
+    @JvmField var left: TreeNode? = null,
+    @JvmField var right: TreeNode? = null,
+    var parent: TreeNode? = null // 少数题目用到
 )
+
+fun isTreeEquals(root1: TreeNode?, root2: TreeNode?): Boolean {
+    if (root1 == null && root2 == null) {
+        return true
+    }
+    if (root1 == null || root2 == null) {
+        return false
+    }
+    if (root1.`val` != root2.`val`) {
+        return false
+    }
+    return isTreeEquals(root1.left, root2.left) && isTreeEquals(root1.right, root2.right)
+}
 
 /**
  * 按层遍历属于宽度遍历（广度优先），其余属于深度遍历（深度优先）
@@ -24,6 +38,7 @@ interface TreeVisitor {
 
 /**
  * 递归通过系统栈来保存现场
+ * 可以通过向 stack 和 queue 内放入空值，来减少判空次数
  */
 class RecursiveTreeVisitor : TreeVisitor {
     private var shouldStop = false
@@ -83,7 +98,7 @@ class RecursiveTreeVisitor : TreeVisitor {
     private fun layoutOrder(node: TreeNode?, depth: Int, result: MutableList<MutableList<TreeNode>>) {
         if (node == null) return
 
-        // 如果 result 中的列表数小于当前深度，则添加一个新的空列表
+        // ** 如果 result 中的列表数小于当前深度，则添加一个新的空列表
         if (depth >= result.size) {
             result.add(mutableListOf())
         }
@@ -121,10 +136,10 @@ class IterativeTreeVisitor : TreeVisitor {
         val stack = Stack<TreeNode>()
         stack.push(root)
         while (stack.isNotEmpty()) {
-            val cur = stack.pop()
+            val cur = stack.pop() ?: continue
             if (!visitor(cur)) break
-            cur.right?.let { stack.push(it) }
-            cur.left?.let { stack.push(it) }
+            stack.push(cur.right)
+            stack.push(cur.left)
         }
     }
 
@@ -135,8 +150,8 @@ class IterativeTreeVisitor : TreeVisitor {
      * 重复 1-2
      */
     override fun inOrder(root: TreeNode?, visitor: (TreeNode) -> Boolean) {
-        var cur: TreeNode? = root
-        val stack = Stack<TreeNode>()
+        var cur: TreeNode? = root // 表示当前遍历节点
+        val stack = Stack<TreeNode>() // stack 用于存放遍历时遇到的根节点
         while (stack.isNotEmpty() || cur != null) {
             if (cur != null) {
                 stack.push(cur)
@@ -160,10 +175,10 @@ class IterativeTreeVisitor : TreeVisitor {
         val reverseStack = Stack<TreeNode>()
         stack.push(root)
         while (stack.isNotEmpty()) {
-            val cur = stack.pop()
+            val cur = stack.pop() ?: continue
             reverseStack.push(cur)
-            cur.left?.let { stack.push(it) }
-            cur.right?.let { stack.push(it) }
+            stack.push(cur.left)
+            stack.push(cur.right)
         }
         while (reverseStack.isNotEmpty()) {
             if (!visitor(reverseStack.pop())) break
@@ -186,10 +201,60 @@ class IterativeTreeVisitor : TreeVisitor {
         val queue: Queue<TreeNode> = LinkedList()
         queue.offer(root)
         while (queue.isNotEmpty()) {
-            val node = queue.poll()
+            val node = queue.poll() ?: return
             if (!visitor(node)) break
-            node.left?.let { queue.offer(it) }
-            node.right?.let { queue.offer(it) }
+            queue.offer(node.left)
+            queue.offer(node.right)
         }
     }
+}
+
+fun inorderTraversal(root: TreeNode?): List<Int> {
+    root ?: return emptyList()
+    val result = mutableListOf<Int>()
+    val stack = Stack<TreeNode>()
+    var cur: TreeNode? = root
+    while (stack.isNotEmpty() || cur != null) {
+        if (cur != null) {
+            stack.push(cur)
+            cur = cur.left
+        } else {
+            val node = stack.pop()
+            result.add(node.`val`)
+            cur = node.right
+        }
+    }
+
+    return result
+}
+
+/**
+ * leetcode-102 二叉树的层序遍历
+ *
+ * 通过一个 map 记录每个节点所在层
+ */
+fun levelOrder(root: TreeNode?): List<List<Int>> {
+    root ?: return emptyList()
+    val queue: Queue<TreeNode> = LinkedList()
+    val levels = mutableMapOf<TreeNode, Int>()
+    levels[root] = 0
+    queue.offer(root)
+    val result = mutableListOf<MutableList<Int>>()
+    while (queue.isNotEmpty()) {
+        val cur = queue.poll() ?: continue
+        val level = levels[cur]!!
+        if (level >= result.size) {
+            result.add(mutableListOf())
+        }
+        result[level].add(cur.`val`)
+        if (cur.left != null) {
+            queue.offer(cur.left)
+            levels[cur.left!!] = level + 1
+        }
+        if (cur.right != null) {
+            queue.offer(cur.right)
+            levels[cur.right!!] = level + 1
+        }
+    }
+    return result
 }
