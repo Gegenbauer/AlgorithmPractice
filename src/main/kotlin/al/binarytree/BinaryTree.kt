@@ -137,7 +137,7 @@ class IterativeTreeVisitor : TreeVisitor {
         stack.push(root)
         while (stack.isNotEmpty()) {
             val cur = stack.pop() ?: continue
-            if (!visitor(cur)) break
+            if (!visitor(cur)) return
             stack.push(cur.right)
             stack.push(cur.left)
         }
@@ -158,7 +158,7 @@ class IterativeTreeVisitor : TreeVisitor {
                 cur = cur.left
             } else {
                 cur = stack.pop()
-                if (!visitor(cur)) break
+                if (!visitor(cur)) return
                 cur = cur.right
             }
         }
@@ -181,7 +181,7 @@ class IterativeTreeVisitor : TreeVisitor {
             stack.push(cur.right)
         }
         while (reverseStack.isNotEmpty()) {
-            if (!visitor(reverseStack.pop())) break
+            if (!visitor(reverseStack.pop())) return
         }
     }
 
@@ -202,9 +202,89 @@ class IterativeTreeVisitor : TreeVisitor {
         queue.offer(root)
         while (queue.isNotEmpty()) {
             val node = queue.poll() ?: return
-            if (!visitor(node)) break
+            if (!visitor(node)) return
             queue.offer(node.left)
             queue.offer(node.right)
+        }
+    }
+}
+
+class IterativeTreeVisitor2: TreeVisitor {
+    override fun preOrder(root: TreeNode?, visitor: (TreeNode) -> Boolean) {
+        root ?: return
+
+        var cur: TreeNode? = root
+        val stack = Stack<TreeNode>()
+        while (cur != null || stack.isNotEmpty()) {
+            while (cur != null) {
+                if (!visitor(cur)) {
+                    return
+                }
+                stack.push(cur)
+                cur = cur.left
+            }
+            val node = stack.pop()
+            cur = node.right
+        }
+    }
+
+    override fun inOrder(root: TreeNode?, visitor: (TreeNode) -> Boolean) {
+        root ?: return
+
+        var cur: TreeNode? = root
+        val stack = Stack<TreeNode>()
+        while (cur != null ||stack.isNotEmpty()) {
+            while (cur != null) {
+                stack.push(cur)
+                cur = cur.left
+            }
+            val node = stack.pop()
+            if (!visitor(node)) return
+            cur = node.right
+        }
+    }
+
+    override fun postOrder(root: TreeNode?, visitor: (TreeNode) -> Boolean) {
+        root ?: return
+
+        var cur: TreeNode? = root
+        val stack = Stack<TreeNode>()
+        val result = mutableListOf<TreeNode>()
+        while (cur != null || stack.isNotEmpty()) {
+            while (cur != null) {
+                result.add(cur)
+                stack.push(cur)
+                cur = cur.right
+            }
+            val node = stack.pop()
+            cur = node.left
+        }
+        result.reversed().forEach {
+            if (!visitor(it)) return
+        }
+    }
+
+    override fun layerOrder(root: TreeNode?, visitor: (TreeNode) -> Boolean) {
+        root ?: return
+
+        var arr = mutableListOf<TreeNode>()
+        arr.add(root)
+        while (arr.isNotEmpty()) {
+            val tmp = mutableListOf<TreeNode>()
+            for (node in arr) {
+                if (node.left != null) {
+                    tmp.add(node.left!!)
+                }
+                if (node.right != null) {
+                    tmp.add(node.right!!)
+                }
+            }
+
+            arr.forEach {
+                if (!visitor(it)) return
+            }
+
+            arr = tmp
         }
     }
 }

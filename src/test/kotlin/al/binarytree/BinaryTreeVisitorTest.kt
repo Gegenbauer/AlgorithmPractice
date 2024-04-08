@@ -99,4 +99,42 @@ class BinaryTreeVisitorTest {
             isArrayEquals(traversalList.toIntArray(), intArrayOf(1, 2, 3, 4, 5, 6, 7))
         }
     }
+
+    @Test
+    fun testIterativeVisitor2() {
+        val tree = generateTree()
+        val traversalList = mutableListOf<Int>()
+        val visitor = IterativeTreeVisitor2()
+        visitor.preOrder(tree) { node ->
+            traversalList.add(node.`val`)
+            true
+        }
+        assertTrue {
+            isArrayEquals(traversalList.toIntArray(), intArrayOf(1, 2, 4, 5, 3 ,6, 7))
+        }
+        traversalList.clear()
+        visitor.inOrder(tree) { node ->
+            traversalList.add(node.`val`)
+            true
+        }
+        assertTrue {
+            isArrayEquals(traversalList.toIntArray(), intArrayOf(4, 2, 5, 1, 6, 3, 7))
+        }
+        traversalList.clear()
+        visitor.postOrder(tree) { node ->
+            traversalList.add(node.`val`)
+            true
+        }
+        assertTrue {
+            isArrayEquals(traversalList.toIntArray(), intArrayOf(4, 5, 2, 6, 7, 3, 1))
+        }
+        traversalList.clear()
+        visitor.layerOrder(tree) { node ->
+            traversalList.add(node.`val`)
+            true
+        }
+        assertTrue {
+            isArrayEquals(traversalList.toIntArray(), intArrayOf(1, 2, 3, 4, 5, 6, 7))
+        }
+    }
 }

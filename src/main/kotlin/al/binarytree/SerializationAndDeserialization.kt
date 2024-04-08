@@ -3,7 +3,7 @@ package al.binarytree
 import java.util.*
 
 
-const val NULL_NODE_FLAG = "#"
+const val NULL_NODE_FLAG = "null"
 
 /**
  * 将一棵数转化为字符串和按照字符串生成一棵树
@@ -294,7 +294,7 @@ class Codec2() {
 
     companion object {
         val EMPTY_NODE = TreeNode(0)
-        private const val NULL_FLAG = "#"
+        private const val NULL_FLAG = "null"
         private const val SPLITTER = ','
     }
 }

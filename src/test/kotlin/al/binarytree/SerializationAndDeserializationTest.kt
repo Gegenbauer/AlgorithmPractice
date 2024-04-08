@@ -56,7 +56,7 @@ class SerializationAndDeserializationTest {
         val iterativeDeserializer = IterativeDeserializer()
 
         val tree = generateBinaryTree1()
-        val expectSerializeResult = "1,2,4,#,#,5,#,#,3,6,#,#,7,#,#"
+        val expectSerializeResult = "1,2,4,null,#,5,null,null,3,6,null,null,7,null,null"
         val recursiveSerializeResult = recursiveSerializer.preOrder(tree)
         val iterativeSerializeResult = iterativeSerializer.preOrder(tree)
         assertEquals(iterativeSerializeResult.joinToString(","), expectSerializeResult)
@@ -84,7 +84,7 @@ class SerializationAndDeserializationTest {
         val iterativeDeserializer = IterativeDeserializer()
 
         val tree = generateBinaryTree2()
-        val expectSerializeResult = "1,2,4,#,#,#,3,5,#,#,6,#,7,#,#"
+        val expectSerializeResult = "1,2,4,null,null,null,3,5,null,null,6,null,7,null,null"
         val recursiveSerializeResult = recursiveSerializer.preOrder(tree)
         val iterativeSerializeResult = iterativeSerializer.preOrder(tree)
         assertEquals(iterativeSerializeResult.joinToString(","), expectSerializeResult)
@@ -104,7 +104,7 @@ class SerializationAndDeserializationTest {
         val iterativeDeserializer = IterativeDeserializer()
 
         val tree = generateBinaryTree3()
-        val expectSerializeResult = "#"
+        val expectSerializeResult = "null"
         val recursiveSerializeResult = recursiveSerializer.preOrder(tree)
         val iterativeSerializeResult = iterativeSerializer.preOrder(tree)
         assertEquals(iterativeSerializeResult.joinToString(","), expectSerializeResult)
