@@ -59,11 +59,11 @@ class TreeMaxWidthTest {
 
     @Test
     fun test() {
-        //val tree1 = generateBinaryTree1()
-        //assertEquals(4, TreeMaxWidth().maxWidth(tree1))
+        val tree1 = generateBinaryTree1()
+        assertEquals(4, TreeMaxWidth().maxWidth(tree1))
         val tree2 = generateBinaryTree2()
         assertEquals(4, TreeMaxWidth().maxWidth(tree2))
-        //val tree3 = generateBinaryTree3()
-        //assertEquals(4, TreeMaxWidth().maxWidth(tree3))
+        val tree3 = generateBinaryTree3()
+        assertEquals(4, TreeMaxWidth().maxWidth(tree3))
     }
 }

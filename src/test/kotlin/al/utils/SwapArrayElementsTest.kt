@@ -1,12 +1,13 @@
 package al.utils
 
+import al.util.generateRandomArray
 import al.util.swap1
 import al.util.swap2
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
-class UtilTest {
+class SwapArrayElementsTest {
 
     @Test
     fun testSwap1() {

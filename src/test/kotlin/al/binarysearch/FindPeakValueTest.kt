@@ -1,7 +1,6 @@
 package al.binarysearch
 
-import al.utils.generateRandomArray
-import java.util.*
+import al.util.generateRandomArray
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue

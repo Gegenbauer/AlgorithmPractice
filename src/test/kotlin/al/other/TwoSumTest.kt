@@ -1,7 +1,7 @@
 package al.other
 
 import al.others.Solution
-import al.utils.isArrayEquals
+import al.util.isArrayEquals
 import kotlin.test.Test
 import kotlin.test.assertTrue
 

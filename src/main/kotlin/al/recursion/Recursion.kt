@@ -14,6 +14,8 @@ import kotlin.math.max
  * 如果 log(b, a) < d, 复杂度为 O(N ^ d)
  * 如果 log(b, a) > d, 复杂度为 O(N ^ log(b, a))
  * 如果 log(b, a) == d, 复杂度为 O(N ^ d * logN)
+ *
+ * 递归函数时间复杂度 = 递归函数本身时间复杂度 * 递归函数调用的次数
  */
 
 /**

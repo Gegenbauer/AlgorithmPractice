@@ -1,6 +1,6 @@
 package al.binarysearch
 
-import al.utils.generateRandomArray
+import al.util.generateRandomArray
 import binarySearch
 import java.util.*
 import kotlin.random.Random

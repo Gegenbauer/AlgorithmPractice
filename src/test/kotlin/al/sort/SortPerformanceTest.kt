@@ -6,7 +6,7 @@ import al.sort.quick.QuickSort
 import al.sort.simple.bubbleSort
 import al.sort.simple.insertSort
 import al.sort.simple.selectionSort
-import al.utils.generateRandomArray
+import al.util.generateRandomArray
 import kotlin.system.measureNanoTime
 import kotlin.system.measureTimeMillis
 import kotlin.test.Test

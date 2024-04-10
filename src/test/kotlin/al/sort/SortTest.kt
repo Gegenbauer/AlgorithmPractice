@@ -9,8 +9,8 @@ import al.sort.quick.QuickSort
 import al.sort.simple.bubbleSort
 import al.sort.simple.insertSort
 import al.sort.simple.selectionSort
-import al.utils.generateRandomArray
-import al.utils.isArrayEquals
+import al.util.generateRandomArray
+import al.util.isArrayEquals
 import kotlin.test.Test
 import kotlin.test.assertTrue
 

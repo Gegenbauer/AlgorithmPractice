@@ -1,6 +1,6 @@
 package al.prefix
 
-import al.utils.generateRandomArray
+import al.util.generateRandomArray
 import kotlin.math.min
 import kotlin.test.Test
 import kotlin.test.assertEquals

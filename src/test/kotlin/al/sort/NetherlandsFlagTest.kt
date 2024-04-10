@@ -1,8 +1,8 @@
 package al.sort
 
 import al.sort.quick.NetherlandsFlags
-import al.utils.generateRandomArray
-import al.utils.isArrayEquals
+import al.util.generateRandomArray
+import al.util.isArrayEquals
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertTrue

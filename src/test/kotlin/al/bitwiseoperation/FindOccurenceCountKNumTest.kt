@@ -1,6 +1,6 @@
 package al.bitwiseoperation
 
-import al.utils.generateKMArray
+import al.util.generateKMArray
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals

@@ -3,7 +3,7 @@ package al.stackorqueue
 import al.linkedlist.deleteDuplicates
 import al.linkedlist.isLinkedListEquals
 import al.linkedlist.toSingleNodeLinkedList
-import al.utils.generateRandomArray
+import al.util.generateRandomArray
 import kotlin.test.Test
 import kotlin.test.assertTrue
 

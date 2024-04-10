@@ -1,7 +1,7 @@
 package al.sort
 
 import al.sort.merge.SmallSum
-import al.utils.generateRandomArray
+import al.util.generateRandomArray
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals

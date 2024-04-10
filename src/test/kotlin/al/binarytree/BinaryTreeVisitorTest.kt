@@ -1,6 +1,6 @@
 package al.binarytree
 
-import al.utils.isArrayEquals
+import al.util.isArrayEquals
 import kotlin.test.Test
 import kotlin.test.assertTrue
 

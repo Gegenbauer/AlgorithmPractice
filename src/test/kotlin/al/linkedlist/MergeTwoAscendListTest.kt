@@ -1,6 +1,6 @@
 package al.linkedlist
 
-import al.utils.generateRandomArray
+import al.util.generateRandomArray
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
