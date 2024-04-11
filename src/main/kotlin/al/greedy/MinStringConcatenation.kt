@@ -47,4 +47,8 @@ class MinStringConcatenation {
             visited[index] = false
         }
     }
+
+    fun dp(strs: Array<String>): String {
+        TODO("动态规划")
+    }
 }
