@@ -67,3 +67,25 @@
 > F 的子节点一定在先序遍历 F 的右侧，因为他们一定在 F 之后遍历
 > F 作为左树姿态的右兄一定在先序遍历 F 的右侧
 > F 作为右树姿态的左兄一定在后序遍历 F 的左侧
+
+### 遍历模板
+
+```kotlin
+fun traverse(root: TreeNode) {
+  var cur: TreeNode? = root
+  val stack = Stack<TreeNode>()
+  while (cur != null || stack.isNotEmpty()) {
+    while(cur != null) {
+      // 前序遍历访问
+      stack.push(cur)
+      cur = cur.left
+    }
+    val node = stack.pop()
+    // 中序遍历访问
+    cur = node.right
+  }
+}
+
+// 后序遍历为前序遍历的左右交换，再逆序
+```
+

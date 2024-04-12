@@ -78,4 +78,8 @@ class UnionSet<T>(values: List<T>) {
         sizeMap[largeSetRoot] = aSize + bSize
         sizeMap.remove(smallSetRoot)
     }
+
+    fun setCount(): Int {
+        return sizeMap.size
+    }
 }
