@@ -3,17 +3,17 @@ package al.graph
 /**
  * 没有出度入度，可能也没有权重
  */
-class Node(
+class Node @JvmOverloads constructor(
     val value: Int,
     /**
      * 入度：有多少条边指向当前节点
      */
-    var `in`: Int = 0,
+    var inDegree: Int = 0,
 
     /**
      * 出度：该节点指向多少条边
      */
-    var out: Int = 0,
+    var outDegree: Int = 0,
 
     /**
      * 邻接节点：从该节点出发能直接找到的节点
@@ -57,8 +57,8 @@ fun generateGraph(matrix: Array<IntArray>): Graph {
         }
         val fromNode = graph.nodes[from]!!
         val toNode = graph.nodes[to]!!
-        fromNode.out++
-        toNode.`in`++
+        fromNode.outDegree++
+        toNode.inDegree++
         val edge = Edge(weight, fromNode, toNode)
 
         fromNode.nexts.add(toNode)
