@@ -7,7 +7,7 @@ public class TopologicalSortJ {
     /**
      * 邻接表法
      */
-    static class DirectedGraphNode {
+    public static class DirectedGraphNode {
         int label;
         List<DirectedGraphNode> neighbors;
 
@@ -79,15 +79,7 @@ public class TopologicalSortJ {
             records.add(record);
         }
 
-        records.sort((o1, o2) -> {
-            if (o1.reachableNodeCount == o2.reachableNodeCount) {
-                return 0;
-            } else if (o1.reachableNodeCount > o2.reachableNodeCount){
-                return -1;
-            } else {
-                return 1;
-            }
-        });
+        records.sort((o1, o2) -> Long.compare(o2.reachableNodeCount, o1.reachableNodeCount));
         List<DirectedGraphNode> result = new ArrayList<>();
         for (Record record : records) {
             result.add(record.node);
@@ -110,6 +102,9 @@ public class TopologicalSortJ {
         return record;
     }
 
+    /**
+     * 方法三（通过最大深度排序）
+     */
     public List<DirectedGraphNode> topSort3(List<DirectedGraphNode> graph) {
         List<DepthRecord> records = new ArrayList<>();
         Map<DirectedGraphNode, DepthRecord> cache = new HashMap<>();
@@ -119,7 +114,7 @@ public class TopologicalSortJ {
         for (DepthRecord record : cache.values()) {
             records.add(record);
         }
-        records.sort(((o1, o2) -> o2.maxDepth - o1.maxDepth));
+        records.sort(((o1, o2) -> Integer.compare(o2.maxDepth, o1.maxDepth)));
         List<DirectedGraphNode> result = new ArrayList<>();
         for (DepthRecord record : records) {
             result.add(record.node);

@@ -79,7 +79,7 @@ interface Heap<T> {
     /**
      * 节点值发生变化
      */
-    fun resign(value: T)
+    fun resign(oldValue: T, newValue: T)
 
 }
 
@@ -152,8 +152,8 @@ class CustomHeap<T>(override val maxSize: Int, private val comparator: Comparato
         return data.slice(0 until size)
     }
 
-    override fun resign(value: T) {
-        TODO("Not yet implemented")
+    override fun resign(oldValue: T, newValue: T) {
+
     }
 
     override fun remove(value: T): Boolean {
