@@ -28,7 +28,12 @@ fun isArrayEquals(arr1: IntArray, arr2: IntArray): Boolean {
     return true
 }
 
-fun generateRandomArray(size: Int, maxValue: Int = size, isPositive: Boolean = false, nonZero: Boolean = false): IntArray {
+fun generateRandomArray(
+    size: Int,
+    maxValue: Int = size,
+    isPositive: Boolean = false,
+    nonZero: Boolean = false
+): IntArray {
     return IntArray(size) {
         val start = when {
             isPositive && nonZero -> 1
@@ -77,4 +82,17 @@ fun generateKMArray(k: Int, m: Int, valueCount: Int): Pair<IntArray, Int> {
     result.shuffle()
 
     return Pair(result.toIntArray(), targetValue)
+}
+
+fun createMatrix(matrixStr: String): Array<IntArray> {
+    val rowStrs = matrixStr.subSequence(1, matrixStr.length - 1).split("],[")
+    val rowSize = rowStrs.first().let { it.substring(1, it.length - 1).split(",").size }
+    val result = Array(rowStrs.size) { IntArray(rowSize) }
+    for ((rowIndex, rowStr) in rowStrs.withIndex()) {
+        val rowStrWithoutBrackets = rowStr.removePrefix("[").removeSuffix("]").split(",")
+        for ((index, valueStr) in rowStrWithoutBrackets.withIndex()) {
+            result[rowIndex][index] = valueStr.toInt()
+        }
+    }
+    return result
 }
