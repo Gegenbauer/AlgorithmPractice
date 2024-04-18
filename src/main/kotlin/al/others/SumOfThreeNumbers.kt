@@ -2,7 +2,6 @@ package al.others
 
 import java.util.*
 import kotlin.math.abs
-import kotlin.math.min
 
 /**
  * leetcode-15 三数之和
@@ -32,6 +31,7 @@ import kotlin.math.min
  * 解释：唯一可能的三元组和为 0 。
  */
 class SumOfThreeNumbers {
+    
     fun threeSum(nums: IntArray): List<List<Int>> {
         if (nums.size < 3) return emptyList()
         Arrays.sort(nums)
@@ -108,8 +108,4 @@ class SumOfThreeNumbers {
         }
         return result
     }
-}
-
-fun main() {
-    println(SumOfThreeNumbers().threeSumClosest(intArrayOf(0, 1, 2), 3))
 }
