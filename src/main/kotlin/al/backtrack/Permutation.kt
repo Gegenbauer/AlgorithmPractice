@@ -130,10 +130,35 @@ class Permutation {
     }
 
     fun permute4(nums: IntArray): List<List<Int>> {
-        TODO("通过交换元素的方式实现")
+        nums.sort()
+        val result = LinkedList<List<Int>>()
+        backtrack4(nums, 0, result)
+        return result
     }
 
     private fun backtrack4(nums: IntArray, cur: Int, result: MutableList<List<Int>>) {
-        TODO()
+        if (cur == nums.size) {
+            result.add(nums.toList())
+            return
+        }
+        // 使用过的数不能再使用，避免重复
+        val set = hashSetOf<Int>()
+        for (i in cur until nums.size) {
+            if (nums[i] in set) continue
+            set.add(nums[i])
+            swap(nums, cur, i)
+            backtrack4(nums, cur + 1, result)
+            swap(nums, cur, i)
+        }
     }
+
+    private fun swap(nums: IntArray, a: Int, b: Int) {
+        val temp = nums[a]
+        nums[a] = nums[b]
+        nums[b] = temp
+    }
+}
+
+fun main() {
+    println(Permutation().permute4(intArrayOf(1, 1, 4, 4)))
 }

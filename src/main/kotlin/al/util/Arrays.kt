@@ -85,14 +85,27 @@ fun generateKMArray(k: Int, m: Int, valueCount: Int): Pair<IntArray, Int> {
 }
 
 fun createMatrix(matrixStr: String): Array<IntArray> {
+    if (matrixStr == "[]") return emptyArray()
     val rowStrs = matrixStr.subSequence(1, matrixStr.length - 1).split("],[")
-    val rowSize = rowStrs.first().let { it.substring(1, it.length - 1).split(",").size }
-    val result = Array(rowStrs.size) { IntArray(rowSize) }
-    for ((rowIndex, rowStr) in rowStrs.withIndex()) {
+    val result = ArrayList<List<Int>>()
+    for (rowStr in rowStrs) {
         val rowStrWithoutBrackets = rowStr.removePrefix("[").removeSuffix("]").split(",")
-        for ((index, valueStr) in rowStrWithoutBrackets.withIndex()) {
-            result[rowIndex][index] = valueStr.toInt()
+        val rowArray = ArrayList<Int>()
+        for (valueStr in rowStrWithoutBrackets) {
+            rowArray.add(valueStr.toInt())
         }
+        result.add(rowArray)
     }
-    return result
+    return result.map { it.toIntArray() }.toTypedArray()
 }
+
+fun createMatrix2(matrixStr: String): List<List<Int>> {
+    return createMatrix(matrixStr).map { it.toList() }
+}
+
+fun isMatrixEquals(matrix1: List<List<Int>>, matrix2: List<List<Int>>): Boolean {
+    return matrix1.displayStr == matrix2.displayStr
+}
+
+inline val List<List<Int>>.displayStr: String
+    get() = this.sortedWith {o1, o2 -> o1.joinToString().compareTo(o2.joinToString())}.map { it.joinToString() }.joinToString("\n")

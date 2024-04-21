@@ -1,4 +1,4 @@
-package al.backtrack
+package al.dynamicprogramming
 
 import kotlin.math.min
 
