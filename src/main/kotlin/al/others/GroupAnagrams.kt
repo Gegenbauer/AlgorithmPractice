@@ -21,7 +21,7 @@ import java.util.LinkedList
  * 输出: [["a"]]
  *
  * 提示：
- * 1 <= strs.length <= 104
+ * 1 <= strs.length <= 10^4
  * 0 <= strs[i].length <= 100
  * strs[i] 仅包含小写字母
  */
@@ -29,7 +29,7 @@ class GroupAnagrams {
     fun groupAnagrams(strs: Array<String>): List<List<String>> {
         val map = HashMap<String, LinkedList<String>>()
         strs.forEach {
-            val code = encodeToInt(it)
+            val code = encodeString(it)
             if (map[code] == null) {
                 map[code] = LinkedList()
             }
@@ -41,7 +41,7 @@ class GroupAnagrams {
     /**
      * 26 个字母，映射成另外一个字符串，保证组合相同，映射结果相同
      */
-    private fun encodeToInt(str: String): String {
+    private fun encodeString(str: String): String {
         val result = IntArray(26)
         for (char in str) {
             result[char - 'a']++
@@ -55,8 +55,4 @@ class GroupAnagrams {
         }
         return sb.toString()
     }
-}
-
-fun main() {
-    println(GroupAnagrams().groupAnagrams(arrayOf("ddddddddddg","dgggggggggg")))
 }

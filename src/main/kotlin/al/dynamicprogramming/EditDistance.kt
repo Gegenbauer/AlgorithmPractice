@@ -34,14 +34,19 @@ import kotlin.math.min
  * word1 和 word2 由小写英文字母组成
  */
 class EditDistance {
+
+    fun minDistance(word1: String, word2: String): Int {
+        return dp(word1, word2)
+    }
+
     /**
      * 暴力递归 + 备忘录
      */
-    fun minDistance(word1: String, word2: String): Int {
-        return process(word1, word2, HashMap())
-    }
-
-    private fun process(word1: String, word2: String, cache: HashMap<String, Int>): Int {
+    private fun process(
+        word1: String,
+        word2: String,
+        cache: HashMap<String, Int>
+    ): Int {
         val key = "${word1}_$word2"
         if (cache.containsKey(key)) return cache[key]!!
         if (word2 == word1) {
@@ -73,5 +78,56 @@ class EditDistance {
         }
         cache[key] = result
         return result
+    }
+
+    /**
+     * 暴力尝试
+     */
+    private fun process2(
+        word1: String,
+        word2: String,
+        start1: Int,
+        start2: Int,
+    ): Int {
+        if (start1 == word1.length) {
+            return word2.length - start2
+        }
+        if (start2 == word2.length) {
+            return word1.length - start1
+        }
+        if (word1[start1] == word2[start2]) {
+            return process2(word1, word2, start1 + 1, start2 + 1)
+        }
+        val insert = process2(word1, word2, start1, start2 + 1) + 1
+        val update = process2(word1, word2, start1 + 1, start2 + 1) + 1
+        val delete = process2(word1, word2, start1 + 1, start2) + 1
+        return min(insert, min(update, delete))
+    }
+
+    /**
+     * 暴力尝试改动态规划
+     */
+    private fun dp(word1: String, word2: String): Int {
+        val dp = Array(word1.length + 1) { IntArray(word2.length + 1) }
+
+        for (start2 in 0..word2.length) {
+            dp[word1.length][start2] = word2.length - start2
+        }
+        for (start1 in 0..word1.length) {
+            dp[start1][word2.length] = word1.length - start1
+        }
+        for (start1 in word1.length - 1 downTo 0) {
+            for (start2 in word2.length - 1 downTo 0) {
+                if (word1[start1] == word2[start2]) {
+                    dp[start1][start2] = dp[start1 + 1][start2 + 1]
+                } else {
+                    val insert = dp[start1][start2 + 1] + 1
+                    val update = dp[start1 + 1][start2 + 1] + 1
+                    val delete = dp[start1 + 1][start2] + 1
+                    dp[start1][start2] = min(insert, min(update, delete))
+                }
+            }
+        }
+        return dp[0][0]
     }
 }
