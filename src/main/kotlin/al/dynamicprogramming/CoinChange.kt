@@ -52,10 +52,3 @@ class CoinChange {
     }
 
 }
-
-fun main() {
-    println(CoinChange().dp(intArrayOf(1, 2, 5), 11))
-    println(CoinChange().dp(intArrayOf(2), 3))
-    println(CoinChange().dp(intArrayOf(1), 0))
-    println(CoinChange().dp(intArrayOf(186, 419, 83, 408), 6249))
-}
