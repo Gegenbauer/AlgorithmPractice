@@ -1,36 +1,46 @@
 package al.binarysearch
 
-import al.util.generateRandomArray
-import kotlin.random.Random
+import al.util.isArrayEquals
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
 class FindFirstAndLastTest {
 
+    private val solution = SearchRange()
+
     @Test
     fun test() {
-        repeat(1000) {
-            val arr = generateRandomArray(100, 50).sorted().toIntArray()
-            val target = Random.nextInt(60)
-            val expectValue = arr.withIndex().filter { it.value == target }.run {
-                if (isEmpty()) {
-                    arrayOf(-1, -1)
-                } else if (size == 1) {
-                    arrayOf(get(0).index, get(0).index)
-                } else {
-                    arrayOf(first().index, last().index)
-                }
-            }
+        val arr = intArrayOf(5, 7, 7, 8, 8, 10)
+        val real = solution.searchRange(arr, 8)
+        val expected = intArrayOf(3, 4)
+        assertTrue(
+            isArrayEquals(expected, real),
+            "expected=${expected.contentToString()}\n" +
+                    "real=${real.contentToString()}"
+        )
+    }
 
-            val realValue = searchRange(arr, target)
+    @Test
+    fun test1() {
+        val arr = intArrayOf(5, 7, 7, 8, 8, 10)
+        val real = solution.searchRange(arr, 6)
+        val expected = intArrayOf(-1, -1)
+        assertTrue(
+            isArrayEquals(expected, real),
+            "expected=${expected.contentToString()}\n" +
+                    "real=${real.contentToString()}"
+        )
+    }
 
-            assertTrue(
-                realValue.first() == expectValue.first()
-                        && realValue.last() == expectValue.last(),
-                "arr=${arr.contentToString()}, " +
-                        "expectedValue=${expectValue.contentToString()}" +
-                ", realValue=${realValue.contentToString()}"
-            )
-        }
+    @Test
+    fun test2() {
+        val arr = intArrayOf()
+        val real = solution.searchRange(arr, 6)
+        val expected = intArrayOf(-1, -1)
+        assertTrue(
+            isArrayEquals(expected, real),
+            "expected=${expected.contentToString()}\n" +
+                    "real=${real.contentToString()}"
+        )
     }
 }

@@ -158,7 +158,3 @@ class Permutation {
         nums[b] = temp
     }
 }
-
-fun main() {
-    println(Permutation().permute4(intArrayOf(1, 1, 4, 4)))
-}

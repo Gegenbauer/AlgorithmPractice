@@ -1,6 +1,7 @@
 package al.binarytree
 
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 const val NULL_NODE_FLAG = "null"
@@ -297,4 +298,36 @@ class Codec2() {
         private const val NULL_FLAG = "null"
         private const val SPLITTER = ','
     }
+}
+
+fun layerDeserialize(str: String): TreeNode? {
+    val nodesStr = str.split(",")
+    val nodesStrQueue = LinkedList<String>()
+    nodesStr.forEach { nodesStrQueue.offer(it) }
+    val rootStr = nodesStrQueue.poll()
+    val root = getTreeNode(rootStr)
+    root ?: return null
+
+    var layerNodes = ArrayList<TreeNode>()
+    layerNodes.add(root)
+    while (nodesStrQueue.isNotEmpty()) {
+        val tmp = ArrayList<TreeNode>()
+        for (node in layerNodes) {
+            node.left = getTreeNode(nodesStrQueue.poll())
+            if (node.left != null) {
+                tmp.add(node.left!!)
+            }
+            node.right = getTreeNode(nodesStrQueue.poll())
+            if (node.right != null) {
+                tmp.add(node.right!!)
+            }
+        }
+        layerNodes = tmp
+    }
+    return root
+}
+
+private fun getTreeNode(str: String): TreeNode? {
+    if (str == "null") return null
+    return TreeNode(str.toInt())
 }
