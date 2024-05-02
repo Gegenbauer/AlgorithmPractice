@@ -63,30 +63,35 @@ class InversionCount {
      * 1
      */
     private fun merge(arr: IntArray, start: Int, mid: Int, end: Int): Int {
-        val help = IntArray(end - start + 1)
-        var helpIndex = help.lastIndex
-        var index1 = mid
-        var index2 = end
         var reversePairs = 0
 
-        // 因为如果从左往右拷贝，则左边的数拷贝的时候只有比右边的数小的时候
-        // 这样导致不知道右边有多少数比左边小
-        // 相等的时候需要拷贝右边的数，因为左边的数拷贝的时候需要知道右边有多少个数比他小
-        while (index1 >= start && index2 >= mid + 1) {
-            help[helpIndex--] = if (arr[index1] > arr[index2]) {
-                reversePairs += (index2 - (mid + 1) + 1)
-                arr[index1--]
+        var right = mid + 1
+        for (left in start..mid) {
+            while (right <= end && arr[right] < arr[left]) {
+                right++
+            }
+            reversePairs += right - (mid + 1)
+        }
+
+        val help = IntArray(end - start + 1)
+        var helpIndex = 0
+        var index1 = start
+        var index2 = mid + 1
+
+        while (index1 <= mid && index2 <= end) {
+            help[helpIndex++] = if (arr[index1] <= arr[index2]) {
+                arr[index1++]
             } else {
-                arr[index2--]
+                arr[index2++]
             }
         }
 
-        while (index1 >= start) {
-            help[helpIndex--] = arr[index1--]
+        while (index1 <= mid) {
+            help[helpIndex++] = arr[index1++]
         }
 
-        while (index2 >= mid + 1) {
-            help[helpIndex--] = arr[index2--]
+        while (index2 <= end) {
+            help[helpIndex++] = arr[index2++]
         }
 
         for (i in help.indices) {

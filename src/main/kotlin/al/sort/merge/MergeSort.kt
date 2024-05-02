@@ -3,7 +3,6 @@ package al.sort.merge
 /**
  * 让数组在 L-M 有序，在
  */
-
 class RecursiveMergeSort {
 
     fun mergeSort(arr: IntArray) {
@@ -68,7 +67,8 @@ class IterativeMergeSort {
         while (mergeSize < arr.size) {
             for (l in arr.indices step mergeSize * 2) {
                 val r = (l + mergeSize * 2 - 1).coerceAtMost(arr.lastIndex)
-                val mid = (l + mergeSize - 1).coerceAtMost(arr.lastIndex) // mid 必须为上一次步长的 r
+                // mid 必须为上一次步长的 r
+                val mid = (l + mergeSize - 1).coerceAtMost(arr.lastIndex)
 
                 merge(arr, l, mid, r)
             }

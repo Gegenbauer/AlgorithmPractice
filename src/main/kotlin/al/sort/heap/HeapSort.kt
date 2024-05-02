@@ -16,7 +16,6 @@ class HeapSort {
      * 1. 从上往下建堆，O(N * logN)
      * 2. 从下往上建堆，O(N)
      *
-     *
      * 堆排序对于一个几乎有序的数组，效率更高
      */
     fun sort(arr: IntArray) {

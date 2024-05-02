@@ -3,7 +3,6 @@ package al.linkedlist
 /**
  * 从链表中找到中间节点
  * 如果为奇数，则链表只有一个中间节点，如果为偶数，则有两个中间节点
- *
  */
 class FindMiddleNode {
 
